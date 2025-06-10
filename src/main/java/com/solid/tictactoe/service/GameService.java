@@ -11,7 +11,12 @@ import java.util.List;
 public class GameService {
 
     public Game createGame(int size, List<Player> players, List<WinningStrategy> winningStrategies) {
-        return new Game(size, players, winningStrategies);
+        //return new Game(size, players, winningStrategies);
+        return Game.builder()
+                .withBoard(size)
+                .withplayers(players)
+                .withWinningStrategies(winningStrategies)
+                .build();
     }
 
 }
