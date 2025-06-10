@@ -2,12 +2,15 @@ package com.solid.tictactoe;
 
 import com.solid.tictactoe.controller.GameController;
 import com.solid.tictactoe.models.*;
+import com.solid.tictactoe.service.GameService;
 
 import java.util.List;
 
 public class Client {
     public static void main(String[] args) {
-        GameController gameController = new GameController();
+
+        GameService gameService = new GameService();
+        GameController gameController = new GameController(gameService);
 
         Player p1 = new HumanPlayer("david", new Symbol('X'), 25, 1);
         Player p2 = new Bot("Bot", BotDifficultyLevel.EASY);
