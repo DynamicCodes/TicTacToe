@@ -2,7 +2,7 @@ package com.solid.tictactoe.models;
 
 @lombok.Getter
 @lombok.Setter
-public class Player {
+public abstract class Player {
     private String name;
     private PlayerType playerType;
     private Symbol symbol;
@@ -18,6 +18,7 @@ public class Player {
         this.playerType = playerType;
         this.symbol = symbol;
     }
+    public abstract Move makeMove(Board board);
 
 
 }
