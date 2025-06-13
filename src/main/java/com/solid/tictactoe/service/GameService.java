@@ -76,5 +76,24 @@ public class GameService {
     private boolean checkDraw(Game game){
         return game.getMoves().size() == game.getBoard().getSize() * game.getBoard().getSize();
     }
+    public void undoMove(Game game){
+        if(game.getMoves().size() == 0){
+            System.out.println("No moves to undo.");
+            return;
+        }
+
+        Move lastMove = game.getMoves().get(game.getMoves().size() - 1);
+        game.getMoves().remove(game.getMoves().size() - 1);
+
+        lastMove.getCell().setCellStatus(CellStatus.EMPTY);
+        lastMove.getCell().setPlayer(null);
+
+        int nextPlayer = game.getNextPlayerIndex()-1;
+        game.setNextPlayerIndex((nextPlayer + game.getPlayers().size()) % game.getPlayers().size());
+
+        for(WinningStrategy winningStrategy : game.getWinningStrategies()){
+            winningStrategy.undoMove(lastMove);
+        }
+    }
 
 }

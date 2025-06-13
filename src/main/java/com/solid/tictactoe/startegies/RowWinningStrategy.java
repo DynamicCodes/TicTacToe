@@ -30,4 +30,12 @@ public class RowWinningStrategy implements WinningStrategy {
         return rowMap.get(ch) == board.getSize();
 
     }
+
+    @Override
+    public void undoMove(Move lastMove) {
+        int row = lastMove.getCell().getRow();
+        Character ch = lastMove.getPlayer().getSymbol().getSymbol();
+
+        rowCounts.get(row).put(ch, rowCounts.get(row).get(ch) - 1);
+    }
 }

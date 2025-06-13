@@ -3,6 +3,8 @@ package com.solid.tictactoe;
 import com.solid.tictactoe.controller.GameController;
 import com.solid.tictactoe.models.*;
 import com.solid.tictactoe.service.GameService;
+import com.solid.tictactoe.startegies.RowWinningStrategy;
+import com.solid.tictactoe.startegies.WinningStrategy;
 
 import java.util.List;
 
@@ -12,13 +14,15 @@ public class Client {
         GameService gameService = new GameService();
         GameController gameController = new GameController(gameService);
 
+        WinningStrategy winningStrategy1 = new RowWinningStrategy();
+
         Player p1 = new HumanPlayer("david", new Symbol('X'), 25, 1);
         Player p2 = new Bot("Bot", BotDifficultyLevel.EASY);
 
         Game game = gameController.startGame(
                 3,
                 List.of(p1, p2),
-                null
+                List.of(winningStrategy1)
         );
 
         gameController.display(game);

@@ -43,7 +43,7 @@ public class GameController {
 
     //winner
     public String getWinner(Game game) {
-         return "Finding winner logic here";
+         return game.getWinner().getName();
     }
 
 
